@@ -10,7 +10,7 @@
             <?php
                 echo "<h1>Hello, Welcome DAW Student!</h1>";
 
-                $conn = mysqli_connect('db', 'root', 'test', "dbname");
+                $conn = mysqli_connect('db', 'root', 'test', "Visitas");
                 
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);
@@ -30,11 +30,11 @@
                 $stmt->execute();
                 */
 
-                $query = 'SELECT * From Person';
+                $query = 'SELECT * From visitas';
                 $result = mysqli_query($conn, $query);
 
                 echo '<table class="table table-striped">';
-                echo '<thead><tr><th>id</th><th>name</th></tr></thead>';
+                echo '<thead><tr><th>Id</th><th>Amount</th><th>Paid</th><th>Date</th><th>Active</th></tr></thead>';
                 while($value = $result->fetch_array(MYSQLI_ASSOC)){
                     echo '<tr>';
                     foreach($value as $element){
