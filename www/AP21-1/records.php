@@ -2,8 +2,8 @@
 
 require_once "Autoloader.php";
 
-$conexion = new Connection();
-$conn = $conexion->getConn();
+$connection = new Connection();
+$conn = $connection->getConn();
 
 for ($i=0; $i < 50; $i++) { 
     $id=$i;
