@@ -7,7 +7,7 @@ $conn = $connection->getConn();
 
 for ($i=0; $i < 50; $i++) { 
     $id=$i;
-    $company="Manolo $i";
+    $company="Alex $i";
     $investment=rand(0, 5000);
     $date="2005/07/31";
     $active=rand(0,1);

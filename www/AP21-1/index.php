@@ -21,7 +21,7 @@
                 $regxPag=10;
                 $pages=ceil($totalRegisters/$regxPag);
                 echo '<table class="table table-striped">';
-                echo '<thead><tr><th>Id</th><th>Company</th><th>Investment</th><th>Date</th><th>Active</th><th>Actions</th></tr></thead>';
+                echo '<thead><tr><th>Id</th><th>Company</th><th>Investment</th><th>Date</th><th>Active</th><th colspan="2">Actions</th></tr></thead>'; 
                 $pagina=isset($_GET["pag"]) ? ($_GET["pag"]) : 1;
                 if ($pagina > $pages) {
                     $pagina=$pages;
@@ -43,8 +43,8 @@
                         foreach($data as $element){
                         echo '<td>' . $element . '</td>';
                     }   
-                        echo '<td>' . '<a href="delete.php?id=' . $data["Id"] . '"><img src="img/del_icon.png" alt="" width=50px height=50px ></a>' . '</td>';
-                        echo '<td>' . '<a href="edit.php?id=' . $data["Id"] . '"><img src="img/edit_icon.png" alt="" width=50px height=50px ></a>' . '</td>';
+                        echo '<td>' . '<a href="delete.php?id=' . $data["Id"] . '"><img src="del_icon.png" alt="" width=50px height=50px ></a>' . '</td>';
+                        echo '<td>' . '<a href="edit.php?id=' . $data["Id"] . '"><img src="edit_icon.png" alt="" width=50px height=50px ></a>' . '</td>';
                         echo '</tr>';
                         
                 }
