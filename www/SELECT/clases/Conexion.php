@@ -1,35 +1,44 @@
 <?php
-class Conexion {
+
+class Connection
+{
     private $host;
-    private $username;
+    private $userName;
     private $password;
-    private $database;
+    private $db;    
+    protected $conn;
+    protected $configFile = "conf.csv";
 
-    public function __construct() {
-        $config = $this->readCSVConfig('conf.csv');
-        if ($config === false || count($config) !== 4) {
-            throw new Exception("Error cargando la configuración de la conexión desde el archivo CSV.");
-        }
-        list($this->host, $this->username, $this->password, $this->database) = $config;
+    public function __construct()
+    {
+        $this->connect();
     }
 
-    private function readCSVConfig($filename) {
-        $handle = fopen($filename, "r");
-        if ($handle === false) {
-            throw new Exception("Error abriendo el archivo CSV.");
-        }
-        $data = fgetcsv($handle);
-        fclose($handle);
-
-        return $data;
+    public function __destruct()
+    {
+        $this->conn->close();
     }
 
-    public function connect() {
-        $conn = new mysqli($this->host, $this->username, $this->password, $this->database);
-
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-        return $conn;
+    public function getConn()
+    {
+        return $this->conn;
     }
+
+    public function connect()
+    {
+        $configFile = fopen($this->configFile, "r") or die("Unable to open file!");
+        if (!feof($configFile)) {
+            $connData = fgetcsv($configFile);
+            $this->host = $connData[0];
+            $this->userName = $connData[1];
+            $this->password = $connData[2];
+            $this->db = $connData[3];
+            $this->conn = new mysqli($this->host, $this->userName, $this->password, $this->db);
+            if ($this->conn->connect_error) {
+                die("Connection failed: " . $this->conn->connect_error);
+            }
+        }
+
+    }
+
 }

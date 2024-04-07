@@ -1,35 +1,44 @@
 <?php
 
-class Conexion
+class Connection
 {
     private $host;
-    private $username;
+    private $userName;
     private $password;
-    private $database;
+    private $db;    
+    protected $conn;
+    protected $configFile = "conf.csv";
 
     public function __construct()
     {
-        $conf = $this->readConfig();
-        $this->host = $conf['host'];
-        $this->username = $conf['username'];
-        $this->password = $conf['password'];
-        $this->database = $conf['database'];
+        $this->connect();
     }
 
-    private function readConfig()
+    public function __destruct()
     {
-        $config = array();
-        if (($handle = fopen("conf.csv", "r")) !== FALSE) {
-            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-                $config[$data[0]] = $data[1];
-            }
-            fclose($handle);
-        }
-        return $config;
+        $this->conn->close();
+    }
+
+    public function getConn()
+    {
+        return $this->conn;
     }
 
     public function connect()
     {
-        return new mysqli($this->host, $this->username, $this->password, $this->database);
+        $configFile = fopen($this->configFile, "r") or die("Unable to open file!");
+        if (!feof($configFile)) {
+            $connData = fgetcsv($configFile);
+            $this->host = $connData[0];
+            $this->userName = $connData[1];
+            $this->password = $connData[2];
+            $this->db = $connData[3];
+            $this->conn = new mysqli($this->host, $this->userName, $this->password, $this->db);
+            if ($this->conn->connect_error) {
+                die("Connection failed: " . $this->conn->connect_error);
+            }
+        }
+
     }
+
 }
