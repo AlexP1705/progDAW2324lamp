@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array de Números Primos</title>
+</head>
+<body>
+    <h1>Array de Números Primos</h1>
+    <p>Introduce el tamaño del array de números primos:</p>
+    <input type="number" id="tamaño">
+    <button onclick="generarNumerosPrimos()">Generar</button>
+    <p id="resultado"></p>
+
+    <script>
+        function esPrimo(numero) {
+            if (numero <= 1) {
+                return false;
+            }
+            for (var i = 2; i <= Math.sqrt(numero); i++) {
+                if (numero % i === 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function generarNumerosPrimos() {
+            var tamaño = parseInt(document.getElementById("tamaño").value);
+            if (isNaN(tamaño) || tamaño <= 0) {
+                alert("Por favor, introduce un número positivo mayor que 0.");
+                return;
+            }
+            
+            var numerosPrimos = [];
+            var numeroActual = 1;
+            while (numerosPrimos.length < tamaño) {
+                if (esPrimo(numeroActual)) {
+                    numerosPrimos.push(numeroActual);
+                }
+                numeroActual++;
+            }
+
+            document.getElementById("resultado").textContent = "Array de números primos: " + numerosPrimos.join(", ");
+        }
+    </script>
+</body>
+</html>

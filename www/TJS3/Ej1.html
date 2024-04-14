@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Aritmética</title>
+</head>
+
+<body>
+    <h1>Calculadora de Media Aritmética</h1>
+    <div id="resultado"></div>
+
+    <script>
+        var numeros = [];
+        for (var i = 0; i < 5; i++) {
+            var numero = parseInt(prompt("Ingrese el número entero " + (i + 1) + ":"));
+            numeros.push(numero);
+        }
+
+        var suma = 0;
+        for (var i = 0; i < numeros.length; i++) {
+            suma += numeros[i];
+        }
+
+        var media = suma / numeros.length;
+
+        var resultadoElement = document.getElementById("resultado");
+        resultadoElement.textContent = "La media aritmética de los números ingresados es: " + media;
+    </script>
+</body>
+
+</html>

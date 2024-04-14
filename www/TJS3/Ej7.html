@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Fechas Válidas</title>
+</head>
+
+<body>
+    <h1>Generador de Fechas Válidas</h1>
+    <button onclick="generarFechas()">Generar Fechas</button>
+    <ul id="fechas"></ul>
+
+    <script>
+        let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+        function generarFechas() {
+            var listaFechas = document.getElementById("fechas");
+            listaFechas.innerHTML = ""; 
+
+            for (var i = 0; i < 10; i++) {
+                var mesAleatorio = Math.floor(Math.random() * 12);
+                var diaAleatorio = Math.floor(Math.random() * 28) + 1; 
+                var fechaAleatoria = `${diaAleatorio} de ${meses[mesAleatorio]} de 2018`;
+
+                var fecha = new Date(`2018-${mesAleatorio + 1}-${diaAleatorio}`);
+                if (fecha.getMonth() === mesAleatorio && fecha.getDate() === diaAleatorio) {
+                    var listItem = document.createElement("li");
+                    listItem.textContent = `Fecha ${i + 1}: ${fechaAleatoria}`;
+                    listaFechas.appendChild(listItem);
+                } else {
+                    i--; 
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

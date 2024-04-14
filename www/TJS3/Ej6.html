@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulación de Partida de Dados</title>
+</head>
+
+<body>
+    <h1>Simulación de Partida de Dados</h1>
+    <button onclick="simularPartida()">Simular Partida</button>
+    <p id="resultado"></p>
+
+    <script>
+        function lanzarDado() {
+            return Math.floor(Math.random() * 6) + 1;
+        }
+
+        function simularPartida() {
+            var jugador1 = [];
+            var jugador2 = [];
+            var ganador = [];
+
+            for (var i = 0; i < 10; i++) {
+                var dadoJugador1 = lanzarDado();
+                var dadoJugador2 = lanzarDado();
+
+                if (dadoJugador1 > dadoJugador2) {
+                    jugador1.push(i + 1); 
+                    ganador.push("Jugador 1");
+                } else if (dadoJugador2 > dadoJugador1) {
+                    jugador2.push(i + 1); 
+                    ganador.push("Jugador 2");
+                } else {
+                    ganador.push("Empate");
+                }
+            }
+
+            mostrarResultados(jugador1, jugador2, ganador);
+        }
+
+        function mostrarResultados(jugador1, jugador2, ganador) {
+            var resultadoElement = document.getElementById("resultado");
+            resultadoElement.innerHTML = "<h2>Resultados de la partida:</h2>";
+            resultadoElement.innerHTML += "<p>Jugador 1 ganó en las rondas: " + jugador1.join(", ") + "</p>";
+            resultadoElement.innerHTML += "<p>Jugador 2 ganó en las rondas: " + jugador2.join(", ") + "</p>";
+            resultadoElement.innerHTML += "<p>Ganador de cada ronda: " + ganador.join(", ") + "</p>";
+            resultadoElement.innerHTML += "<p>Jugador 1 ganó un " + calcularPorcentajeGanadas(jugador1) + "% de las rondas.</p>";
+            resultadoElement.innerHTML += "<p>Jugador 2 ganó un " + calcularPorcentajeGanadas(jugador2) + "% de las rondas.</p>";
+        }
+
+        function calcularPorcentajeGanadas(jugador) {
+            return (jugador.length / 10) * 100;
+        }
+    </script>
+</body>
+
+</html>

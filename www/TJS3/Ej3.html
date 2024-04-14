@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producto de Arrays</title>
+</head>
+<body>
+    <h1>Producto de Arrays</h1>
+    <p>Introduce elementos para el primer array (termina con 0):</p>
+    <input type="number" id="input1">
+    <button onclick="agregarElemento(1)">Agregar</button>
+    <p>Introduce elementos para el segundo array (termina con 0):</p>
+    <input type="number" id="input2">
+    <button onclick="agregarElemento(2)">Agregar</button>
+    <p id="mensaje"></p>
+    <p id="resultado"></p>
+
+    <script>
+        var array1 = [];
+        var array2 = [];
+
+        function agregarElemento(numeroArray) {
+            var inputId = "input" + numeroArray;
+            var inputValue = parseInt(document.getElementById(inputId).value);
+            var array;
+            if (numeroArray === 1) {
+                array = array1;
+            } else {
+                array = array2;
+            }
+            if (inputValue === 0) {
+                calcularProducto(array1, array2);
+            } else {
+                array.push(inputValue);
+            }
+            document.getElementById(inputId).value = ""; 
+        }
+
+        function calcularProducto(arr1, arr2) {
+            if (arr1.length !== arr2.length) {
+                document.getElementById("mensaje").textContent = "Los arrays proporcionados no tienen la misma longitud.";
+                return;
+            }
+
+            var producto = 1;
+            for (var i = 0; i < arr1.length; i++) {
+                producto *= arr1[i] * arr2[i];
+            }
+            document.getElementById("mensaje").textContent = ""; 
+            document.getElementById("resultado").textContent = "El producto de los elementos en la misma posición es: " + producto;
+        }
+    </script>
+</body>
+</html>

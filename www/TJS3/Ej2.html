@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualización de Clasificación</title>
+</head>
+
+<body>
+    <h1>Actualización de Clasificación</h1>
+    <div id="resultado"></div>
+
+    <script>
+        var clasificacion = ["Ana", "Oswaldo", "Raúl", "Celia", "María", "Antonio"];
+
+        function mostrarClasificacion() {
+            var resultadoElement = document.getElementById("resultado");
+            resultadoElement.innerHTML = "<p>" + clasificacion.join(", ") + "</p>";
+        }
+
+        mostrarClasificacion();
+
+        // 1. 
+        var indiceCelia = clasificacion.indexOf("Celia");
+        var indiceRaul = clasificacion.indexOf("Raúl");
+        clasificacion.splice(indiceRaul, 1); 
+        clasificacion.splice(indiceCelia, 0, "Raúl"); 
+        mostrarClasificacion();
+
+        // 2. 
+        var indiceAntonio = clasificacion.indexOf("Antonio");
+        clasificacion.splice(indiceAntonio, 1); 
+        mostrarClasificacion();
+
+        // 3. 
+        var indiceAna = clasificacion.indexOf("Ana");
+        var indiceOswaldo = clasificacion.indexOf("Oswaldo");
+        clasificacion.splice(indiceOswaldo, 0, "Roberto", "Amaya"); 
+        mostrarClasificacion();
+
+        // 4. 
+        clasificacion.unshift("Marta"); 
+        mostrarClasificacion();
+    </script>
+</body>
+
+</html>
